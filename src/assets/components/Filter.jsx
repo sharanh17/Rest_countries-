@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import { ThemeContext } from "./Context";
+
 export default function FilterComponent({
   searchTerm,
   setSearchTerm,
   selectedRegion,
   setSelectedRegion,
   regions,
-  theme,
+
 }) {
+  const { theme } = useContext(ThemeContext);
   return (
     <div
       className={`flex flex-col md:flex-row  ${theme} justify-between items-center gap-4 mb-6`}

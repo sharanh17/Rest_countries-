@@ -1,16 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "./Context";
+  const url = import.meta.env.VITE_APP_API_URL;
 
-export default function CountryDetails({ theme }) {
+export default function CountryDetails() {
+   const { theme } = useContext(ThemeContext);
   const { ccn3 } = useParams();
   const navigate = useNavigate();
   const [country, setCountry] = useState(null);
 
   useEffect(() => {
     const fetchCountry = async () => {
-      try {
+      try {    
         const response = await fetch(
-          `https://restcountries.com/v3.1/alpha/${ccn3}`
+          `${url}alpha/${ccn3}`
         );
         const data = await response.json();
         setCountry(data[0]);

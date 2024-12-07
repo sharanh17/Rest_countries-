@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { FaMoon } from "react-icons/fa";
+import { ThemeContext } from "./Context";
 
-const Header = ({ theme, setTheme }) => {
+const Header = () => {
+  const {theme,setTheme}=useContext(ThemeContext)
   function handleToggleTheme() {
     setTheme(theme === "light" ? "dark" : "light");
   }

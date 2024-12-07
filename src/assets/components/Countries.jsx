@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import CountryCard from "./countryCard";
-import FilterComponent from "./filter";
+import CountryCard from "./CountryCard";
+import FilterComponent from "./Filter";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "./Context";
 
-export default function FetchCountries({ theme }) {
+export default function FetchCountries() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [regions, setRegions] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
+  const { theme } = useContext(ThemeContext);
+  const url = import.meta.env.VITE_APP_API_URL;
 
   const navigate = useNavigate();
 
@@ -17,7 +21,7 @@ export default function FetchCountries({ theme }) {
     const fetchAllCountries = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://restcountries.com/v3.1/all");
+        const response = await fetch(`${url}all`);
         const data = await response.json();
 
         const uniqueRegions = Array.from(

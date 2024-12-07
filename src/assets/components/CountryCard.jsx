@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import { ThemeContext } from "./Context";
+
 export default function CountryCard({
+
   flag,
   name,
   population,
   region,
   capital,
-  theme
 }) {
+  const {theme}=useContext(ThemeContext)
   return (
     <div
       className={` rounded-lg shadow-lg overflow-hidden element-${theme}`}

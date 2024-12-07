@@ -4,27 +4,32 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import FetchCountries from "./assets/Components/coutries";
-import CountryDetails from "./assets/Components/CountryDetails";
-import UseLocalStorage from "./assets/Components/localStorage";
-import Layout from "./assets/Components/layout";
+import FetchCountries from "./assets/components/Countries";
+import CountryDetails from "./assets/components/CountryDetails";
+import UseLocalStorage from "./assets/components/LocalStorage";
+import Layout from "./assets/components/Layout";
+import { ThemeContext } from "./assets/components/Context";
 
 function App() {
-  const [theme, setTheme] = UseLocalStorage("theme", "dark");
+  const [theme, setTheme] = UseLocalStorage("theme", "light");
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Layout theme={theme} setTheme={setTheme} />}>
-          <Route index element={<FetchCountries theme={theme} />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<FetchCountries />} />
           <Route
             path="country/:ccn3"
-            element={<CountryDetails theme={theme} />}
+            element={<CountryDetails />}
           />
         </Route>
       </>
     )
   );
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeContext.Provider value={{theme,setTheme}}>
+      <RouterProvider router={router} />;
+    </ThemeContext.Provider>
+  );
 }
 
 export default App;
